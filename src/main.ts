@@ -1,7 +1,3 @@
-import './style.css';
-import { EditorView, basicSetup } from "codemirror";
-import { javascript } from "@codemirror/lang-javascript";
-
 const defaultCode = `hear ye hear ye, greetings shall perform thus:
     proclaim "Good morrow, noble visitor!"
 so it is written
@@ -46,49 +42,32 @@ function executeCode(code: string) {
 }
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div class="max-w-4xl mx-auto px-4 py-8">
-    <h1 class="text-6xl text-center mb-8 text-amber-900">MedievalSharp</h1>
-    <p class="text-2xl text-center mb-12 text-amber-800">A programming language most noble and true</p>
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold mb-8 text-gray-900">MedievalSharp</h1>
+    <p class="text-lg mb-12 text-gray-600">A modern programming language with medieval flair</p>
     
-    <div class="space-y-12">
-      <section class="bg-amber-100 p-8 rounded-lg shadow-lg">
-        <h2 class="text-3xl mb-4 text-amber-900">Declarations Most Noble</h2>
-        <pre class="bg-amber-50 p-4 rounded">let it be known that message shall be "Hark!"</pre>
-      </section>
-
-      <section class="bg-amber-100 p-8 rounded-lg shadow-lg">
-        <h2 class="text-3xl mb-4 text-amber-900">Functions of Great Import</h2>
-        <pre class="bg-amber-50 p-4 rounded">hear ye hear ye, greetings shall perform thus:
-    proclaim "Good morrow!"
-so it is written</pre>
-      </section>
-
-      <section class="bg-amber-100 p-8 rounded-lg shadow-lg">
-        <h2 class="text-3xl mb-4 text-amber-900">Loops of Eternal Return</h2>
-        <pre class="bg-amber-50 p-4 rounded">whilst count > 0 do repeat:
-    proclaim "Counting: " + count
-    let it be known that count shall be count - 1
-until it is done</pre>
-      </section>
-
-      <section class="bg-amber-100 p-8 rounded-lg shadow-lg">
-        <h2 class="text-3xl mb-4 text-amber-900">Try Your Hand at the Craft</h2>
-        <div id="editor" class="editor mb-4"></div>
-        <button id="runBtn" class="bg-amber-800 text-amber-100 px-6 py-2 rounded hover:bg-amber-900 transition">
-          Execute thy Code
-        </button>
-        <div id="output" class="output mt-4"></div>
-      </section>
+    <div class="mb-6">
+      <div
+        id="editor"
+        contenteditable="true"
+        class="focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50"
+      >${defaultCode}</div>
+      
+      <button id="runBtn" class="mt-4 bg-amber-600 text-white px-6 py-2 rounded-lg hover:bg-amber-700 transition">
+        Execute thy Code
+      </button>
+      
+      <div id="output" class="output"></div>
     </div>
   </div>
 `;
 
-const editor = new EditorView({
-  doc: defaultCode,
-  extensions: [basicSetup, javascript()],
-  parent: document.getElementById('editor')!
+const editor = document.getElementById('editor')!;
+
+editor.addEventListener('input', () => {
+  executeCode(editor.innerText);
 });
 
 document.getElementById('runBtn')?.addEventListener('click', () => {
-  executeCode(editor.state.doc.toString());
+  executeCode(editor.innerText);
 });
