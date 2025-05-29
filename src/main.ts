@@ -1,3 +1,5 @@
+import './style.css';
+
 const defaultCode = `hear ye hear ye, greetings shall perform thus:
     proclaim "Good morrow, noble visitor!"
 so it is written
@@ -47,11 +49,12 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     <p class="text-lg mb-12 text-gray-600">A modern programming language with medieval flair</p>
     
     <div class="mb-6">
-      <div
+      <pre
         id="editor"
         contenteditable="true"
         class="focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50"
-      >${defaultCode}</div>
+        spellcheck="false"
+      >${defaultCode}</pre>
       
       <button id="runBtn" class="mt-4 bg-amber-600 text-white px-6 py-2 rounded-lg hover:bg-amber-700 transition">
         Execute thy Code
@@ -63,6 +66,13 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 `;
 
 const editor = document.getElementById('editor')!;
+
+// Handle paste events to preserve formatting
+editor.addEventListener('paste', (e) => {
+  e.preventDefault();
+  const text = e.clipboardData?.getData('text/plain') || '';
+  document.execCommand('insertText', false, text);
+});
 
 editor.addEventListener('input', () => {
   executeCode(editor.innerText);

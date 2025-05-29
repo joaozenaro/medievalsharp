@@ -5,8 +5,11 @@
 
 #editor {
   font-family: 'MedievalSharp', cursive;
-  @apply bg-amber-50 p-8 rounded-lg shadow-lg min-h-[300px] text-center whitespace-pre-wrap;
+  @apply bg-amber-50 p-8 rounded-lg shadow-lg min-h-[300px] text-center;
+  white-space: pre-wrap;
+  word-wrap: break-word;
   outline: none;
+  tab-size: 4;
 }
 
 .output {
