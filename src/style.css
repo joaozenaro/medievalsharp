@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=MedievalSharp&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-amber-50;
+  font-family: 'MedievalSharp', cursive;
+}
+
+.editor {
+  font-family: 'MedievalSharp', cursive;
+  @apply bg-amber-100 p-4 rounded-lg shadow-inner min-h-[300px];
+}
+
+.cm-editor {
+  font-family: 'MedievalSharp', cursive !important;
+  @apply bg-amber-100 !important;
+}
+
+.output {
+  @apply bg-stone-800 text-amber-200 p-4 rounded-lg font-mono;
+}
